@@ -18,6 +18,7 @@ class PagesController < ApplicationController
       :success => true,
       :propertyprice => property_price,
       :averageincome => yearly_income,
+      :monthlyincome => monthly_income,
       :repaymentperiod => repayment_period
     }
     render :text => info.to_json
