@@ -6,7 +6,7 @@ $('.form_submit').on('click',function(e){
   url: '/details',
   dataType: 'json',
   }).done(function(response){
-    $('#result_section').html(response.success)
+    $('#result_section').html(response)
   });
 });
   

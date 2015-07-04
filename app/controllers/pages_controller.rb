@@ -4,16 +4,21 @@ class PagesController < ApplicationController
 
   def details
 
-    property = PropertyPrice.where("region = '#{params[:details][:region]}'").order(date: :desc).first
-    binding.pry
-    # set = PropertyPrice.find_by (region: params[:region] and EXTRACT(year from date) = 2015;
-    price = property.median
-    # set1 = Income.where()
-    # avg_income = Income.find_by 
+    values  = params[:details]
+    property = PropertyPrice.where("region = '#{values[:region]}'").order(date: :desc).first
+    property_price = property.median
+    income = Income.find_by("gender = '#{values[:gender]}' and state = '#{values[:state]}' and #{values[:age]} between age_min and age_max ")
+    yearly_income = income.average
+    monthly_income =yearly_income /12
+    repayment_amount = monthly_income/ 3 # assuming that they pay one third of their amount
 
+     repayment_period = repayment_time(property_price ,repayment_amount)
 
     info = {
-      :success => true
+      :success => true,
+      :propertyprice => property_price,
+      :averageincome => yearly_income,
+      :repaymentperiod => repayment_period
     }
     render :text => info.to_json
   end
