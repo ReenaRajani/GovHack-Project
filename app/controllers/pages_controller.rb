@@ -3,11 +3,13 @@ class PagesController < ApplicationController
   end
 
   def details
-    binding.pry
+    info = {
+      :success => true
+    }
+    render :text => info.to_json
   end
 
   private
-
   # P = Principle
   # M = Repayment amount
   # R = Interest rate
