@@ -24,12 +24,20 @@ class PagesController < ApplicationController
     render :text => info.to_json
   end
 
+  def toby
+    raise 'hello'
+  end
+
+
   private
-  # P = Principle
-  # M = Repayment amount
-  # R = Interest rate
-  def repayment_time p, m
-    r = 0.07
+  def rate
+    0.06
+  end
+
+  def repayment_time principle, monthly_repayment
+    p = principle
+    m = monthly_repayment
+    r = rate
 
     log_param = m - p*r/12
 
@@ -42,5 +50,14 @@ class PagesController < ApplicationController
     part2 = Math.log(1 + r/12)
 
     part1 / part2
+  end
+
+  def interest_accrued principle, no_of_months
+    p = principle
+    r = rate / 12
+    n = no_of_months
+
+    future_value = p * (1 + r)**n
+    future_value - principle
   end
 end
