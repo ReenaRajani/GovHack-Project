@@ -34,6 +34,14 @@ class PagesController < ApplicationController
     0.06
   end
 
+  # This will be called by #details to determine whether its possible, another
+  # suggestion etc.
+  def statistics
+
+  end
+
+  # Time it would take to repay WITHOUT an increase in
+  # monthly_repayment
   def repayment_time principle, monthly_repayment
     p = principle
     m = monthly_repayment
