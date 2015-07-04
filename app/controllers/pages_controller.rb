@@ -2,6 +2,9 @@ class PagesController < ApplicationController
   def landing
   end
   def details
-    # raise params.inspect 
+    info = {
+      :success => true
+    }
+    render :text => info.to_json
   end
 end
