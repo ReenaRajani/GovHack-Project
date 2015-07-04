@@ -14,7 +14,7 @@ ARGF.each_with_index do |line, i|
 
     matches = age.match(/Under (?<max>18)/)
     if matches
-      age_max = matches['max']
+      age_max = 17
     end
 
     matches = age.match(/(?<min>\d+) \- (?<max>\d+)/)
