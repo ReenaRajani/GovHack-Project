@@ -3,6 +3,74 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-label {
+.submit {
   display:block;
+}
+
+.bighead{
+
+  text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+  font-family:Source Sans Pro;
+  font-weight:900;
+  font-size:80px;
+
+}
+
+.container{
+
+  background-color: rgb(224, 228, 245);
+
+}
+
+.inlineformelement{
+
+  display:inline-block;
+    border-top: 0;
+  border-bottom-color: rgb(187, 184, 184);
+  border-bottom-width: 2px;
+  border-left: 0;
+  border-right: 0;
+  margin: 2px;
+  background-color: rgb(224, 228, 245);
+  text-align: center;
+
+}
+
+.inlineformelement input{
+  border-top: 0;
+  border-bottom-color: rgb(187, 184, 184);
+  border-bottom-width: 2px;
+  border-left: 0;
+  border-right: 0;
+  margin: 2px;
+  background-color: rgb(224, 228, 245);
+  text-align: center;
+
+}
+
+.inlineform {
+
+  margin-top:20px;
+  display:block;
+  font-size: 27px;
+  font-weight: 600;
+  font-family:Source Sans Pro
+}
+#two, #three, #four{
+  display:none;
+}
+
+select {
+  border:none;
+  outline:none;
+  background: transparent;
+  margin:0 auto;
+  
+}
+select,option{
+  text-align: center;
+}
+
+#dropDownSelect{
+  background: url("images/downArrow.png") no-repeat right #fff;
 }

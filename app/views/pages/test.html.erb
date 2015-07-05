@@ -1,0 +1,55 @@
+<div class="container">
+
+<h1 class="bighead">Can I afford to buy a house?</h1>
+  <%= form_for('details',class: 'inlineformelement' , url: '/details') do |f| %>
+
+
+  <div id="one" class="inlineform">
+    I am a <%= f.text_field :age , class: 'triggerElement' , placeholder: '[years]'%>
+   years old
+ </div>
+  <div id="two" class="inlineform">
+    from 
+    <%=  f.select(:state, options_for_select([
+        ['ACT'], 
+        ['NSW'],
+        ['NT'],
+        ['QLD'],
+        ['SA'],
+        ['TAS'],
+        ['VIC'],
+        ['WA'],
+        ]), :class =>  'triggerSelect', :id => 'selectRegion' , 
+    )%>
+  </div>
+  <div id="three" class="inlineform">I would like to buy a property in
+    <%=  f.select(:region, options_for_select([
+      ['Greater Sydney'], 
+      ['Rest of NSW'],
+      ['Greater Melbourne'],
+      ['Rest of Vic.'],
+      ['Greater Brisbane'],
+      ['Rest of Qld'],
+      ['Greater Adelaide'],
+      ['Rest of SA'],
+      ['Greater Perth'],
+      ['Rest of WA'],
+      ['Greater Hobart'],
+      ['Rest of Tas.'],
+      ['Greater Darwin'],
+      ['Rest of NT'],
+      ['Australian Capital Territory'],
+      ]), class: 'triggerSelect', id: 'selectRegion' , 
+  )%>
+  </div>
+  <div id="four" class="inlineform">
+    and I estimate it will take me 
+    <%= f.text_field :years ,class:'triggerElement' ,placeholder:"[Years]" %>
+    years to pay off
+  </div>
+  <div class="form-submit">
+      <%= f.submit "Let's Find out ", class:'form_submit' %>
+    <% end %>
+  </div>
+
+</div>

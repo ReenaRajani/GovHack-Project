@@ -1,5 +1,5 @@
-
-<div class="row">
+<!-- Initial Design using rails -->
+<!-- <div class="row">
   <div class="input_section">
     <%= form_for('details',class:"input_form" ,url: '/details') do |f| %>
       
@@ -30,3 +30,65 @@
   </div>
   
 </div>
+
+ -->
+
+<div class="container">
+
+<h1 class="bighead">Can I afford to buy a house?</h1>
+  
+  <form class="inlineformelement ">
+  <div id="one" class="inlineform">I am a 
+    <input type="text" class="triggerElement" placeholder="[Years]">
+      
+    </input>
+     years old
+   </div>
+  <div id="two" class="inlineform">from
+      <select class="triggerSelect" id="selectState">
+      <option value="" disabled="disabled" selected="selected">Please select a name</option>
+      <option value="ACT">ACT</option>
+      <option value="NSW">NSW</option>
+      <option value="NT">NT</option>
+      <option value="QLD">QLD</option>
+      <option value="SA">SA</option>
+      <option value="TAS">TAS</option>
+      <option value="VIC">VIC</option>
+      <option value="WA">WA</option>
+    </select>
+
+  </div>
+  <div id="three" class="inlineform">I would like to buy a property in
+    
+  <select class="triggerSelect" id="selectRegion">
+    <option value="" disabled="disabled" selected="selected">Please select a region</option>
+    <option value="Sydney">Greater Sydney</option>
+    <option value="NSW">Rest of NSW</option>
+    <option value="Melbourne">Greater Melbourne</option>
+    <option value="Vic">Rest of Vic.</option>
+    <option value="Brisbane">Greater Brisbane</option>
+    <option value="QLD">Rest of Qld</option>
+    <option value="Adelaide">Greater Adelaide</option>
+    <option value="SA">Rest of SA</option>
+    <option value="Perth">Greater Perth</option>
+    <option value="WA">Rest of WA</option>
+    <option value="Hobart">Greater Hobart</option>
+    <option value="Tas">Rest of Tas.</option>
+    <option value="Darwin">Greater Darwin</option>
+    <option value="NT">Rest of NT</option>
+    <option value="ACT">Australian Capital Territory</option>
+  </select>
+</div>
+  <div id="four" class="inlineform">and I estimate it will take me 
+    <input type="text" class="triggerElement" placeholder="[Years]">
+      </input>
+    years to pay off
+
+  <input type="submit" value="Lets Find out">  </input>
+  </form>
+  </div>
+
+</div>
+
+
+ 
