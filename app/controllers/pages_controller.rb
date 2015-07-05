@@ -4,23 +4,23 @@ class PagesController < ApplicationController
 
   def details
 
-    values  = params[:details]
-    property = PropertyPrice.where("region = '#{values[:region]}'").order(date: :desc).first
-    property_price = property.median
-    income = Income.find_by("gender = '#{values[:gender]}' and state = '#{values[:state]}' and #{values[:age]} between age_min and age_max ")
-    yearly_income = income.average
-    monthly_income =yearly_income /12
-    repayment_amount = monthly_income/ 3 # assuming that they pay one third of their amount
+    # values  = params[:details]
+    # property = PropertyPrice.where("region = '#{values[:region]}'").order(date: :desc).first
+    # property_price = property.median
+    # income = Income.find_by("gender = '#{values[:gender]}' and state = '#{values[:state]}' and #{values[:age]} between age_min and age_max ")
+    # yearly_income = income.average
+    # monthly_income =yearly_income /12
+    # repayment_amount = monthly_income/ 3 # assuming that they pay one third of their amount
 
-     repayment_period = repayment_time(property_price ,repayment_amount)
+    #  repayment_period = repayment_time(property_price ,repayment_amount)
 
-    info = {
-      :success => true,
-      :propertyprice => property_price,
-      :averageincome => yearly_income,
-      :monthlyincome => monthly_income,
-      :repaymentperiod => repayment_period
-    }
+    # info = {
+    #   :success => true,
+    #   :propertyprice => property_price,
+    #   :averageincome => yearly_income,
+    #   :monthlyincome => monthly_income,
+    #   :repaymentperiod => repayment_period
+    # }
 
 
 
@@ -29,30 +29,58 @@ class PagesController < ApplicationController
     # Toby's stuff
     gender = values[:gender]
     state = values[:state]
+    region = values[:region]
     age = values[:age]
 
-    where =   "gender = '#{gender}' and " +
-              "state = '#{state}' and " +
-              "(#{age} between age_min and age_max or #{age} < age_max) "
+    property = PropertyPrice.where("region = '#{region}'").order(date: :desc).first
+    amount_owing = property.median
 
-    incomes = Income.where(where).order(average: :desc)
-    advanceBracket = false
+    incomes = incomes()
+    annual_income = incomes.first.average
+    monthly_income = annual_income / 12
+    monthly_repayment = monthly_income / 3
 
-    if incomes.first.age_min > age.to_i
-      advanceBracket = true
+    # We have an array of age brackets
+    # We need to progress up to the HIGHEST age bracket
+    # We need to keep increasing the age until we're in that bracket
+    args = {
+      :age => age,
+      :monthly_repayment => monthly_repayment,
+      :amount_owing => amount_owing
+    }
+
+    peak_age = incomes.sort(average: :desc).first.age_min
+
+    while args[:age] < peak_age
+      args = increase_age args
     end
 
-    binding.pry
+    # Do the remaining time
+    # repayment_time = repayment_time args[:amount_owing], args[:monthly_repayment]
 
     render :text => info.to_json
   end
 
-  def toby
-    raise 'hello'
+  private
+  def incomes
+    where =   "gender = '#{gender}' and " +
+              "state = '#{state}' and " +
+              "(#{age} between age_min and age_max or #{age} < age_max) "
+
+    Income.where(where)
   end
 
+  # Check the repayment time is more than 12 months
+  # increase age variable
+  # recalculate monthly_repayment, amount_owing
+  # return new hash
+  def increase_age args
+    incomes = incomes()
 
-  private
+    repayment_time = repayment_time args[:amount_owing], args[:monthly_repayment]
+
+  end
+
   def rate
     0.06
   end
