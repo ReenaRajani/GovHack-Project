@@ -21,6 +21,29 @@ class PagesController < ApplicationController
       :monthlyincome => monthly_income,
       :repaymentperiod => repayment_period
     }
+
+
+
+
+
+    # Toby's stuff
+    gender = values[:gender]
+    state = values[:state]
+    age = values[:age]
+
+    where =   "gender = '#{gender}' and " +
+              "state = '#{state}' and " +
+              "(#{age} between age_min and age_max or #{age} < age_max) "
+
+    incomes = Income.where(where).order(average: :desc)
+    advanceBracket = false
+
+    if incomes.first.age_min > age.to_i
+      advanceBracket = true
+    end
+
+    binding.pry
+
     render :text => info.to_json
   end
 
@@ -32,12 +55,6 @@ class PagesController < ApplicationController
   private
   def rate
     0.06
-  end
-
-  # This will be called by #details to determine whether its possible, another
-  # suggestion etc.
-  def statistics
-
   end
 
   # Time it would take to repay WITHOUT an increase in
